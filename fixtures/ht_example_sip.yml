@@ -1,0 +1,18 @@
+capture_date: 2016-01-01T00:00:00-04:00
+scanner_user: "University of Michigan"
+scanner_make: "Acme"
+scanner_model: "ScannerTron 9000"
+
+bitonal_resolution_dpi: 600
+contone_resolution_dpi: 300
+
+image_compression_date: 2017-11-01T12:15:00-05:00
+image_compression_agent: umich
+image_compression_tool: ["kdu_compress v7.2.3","ImageMagick 6.7.8"]
+
+scanning_order: left-to-right
+reading_order: left-to-right
+
+pagedata:
+  00000001.tif: { orderlabel: "i", label: "TABLE_OF_CONTENTS" }
+  00000002.jp2: { orderlabel: "ii", label: "PREFACE" }

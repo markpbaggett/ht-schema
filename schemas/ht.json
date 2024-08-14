@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/ht_schema/schemas/ht.json",
+  "type": "object",
+  "title": "TAMU Libraries HathiTrust Schema",
+  "comment": "profile, classes and properties are required; contexts and mappings are not",
+  "required": [
+    "capture_date",
+    "scanner_user"
+  ],
+  "properties": {
+    "capture_date": {
+      "$id": "#/properties/capture_date",
+      "type": "string",
+      "title": "Capture Date",
+      "description": "The date and approximate time the volume was scanned in ISO 8601 combined date format",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|([+-]\\d{2}:\\d{2}))$"
+    },
+    "scanner_user": {
+      "$id": "#/properties/scanner_user",
+      "type": "string",
+      "title": "Scanner User",
+      "description": "This value should reflect “who pushed the button” to actually scan the item. This could be a person, an organizational unit or the name of an outside vendor"
+    },
+    "bitonal_resolution_dpi": {
+      "$id": "#/properties/bitonal_resolution_dpi",
+      "type": "integer",
+      "title": "Bitonal Resolution DPI",
+      "description": "If submitting any bitone (black & white, normally TIFF) images, input the DPI of those images. Only input numbers."
+    },
+    "contone_resolution_dpi": {
+      "$id": "#/properties/contone_resolution_dpi",
+      "type": "integer",
+      "title": "Contone Resolution DPI",
+      "description": " If submitting any continuous tone (contone) images (grayscale or color, normally JP2 but HathiTrust will convert contone TIFF), input the DP of those images. Only input numbers."
+    },
+    "image_compression_date": {
+      "$id": "#/properties/image_compression_date",
+      "type": "string",
+      "title": "Image Compression Date",
+      "description": "The date and approximate time the images were compressed or converted to JPEG2000 before creation of the submission package",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}([+-]\\d{2}:\\d{2})$",
+      "format": "date-time"
+    },
+    "image_compression_agent": {
+      "$id": "#/properties/image_compression_agent",
+      "type": "string",
+      "title": "Image Compression Agent",
+      "description": "The HathiTrust institution identifier of who applied compression"
+    },
+    "image_compression_tool": {
+      "$id": "#/properties/image_compression_tool",
+      "type": "array",
+      "title": "Image Compression Tool",
+      "description": "The Software Name and Version used to compress the images. Is an array of strings and can have multiple values."
+    },
+    "scanner_make": {
+      "$id": "#/properties/scanner_make",
+      "type": "string",
+      "title": "Scanner Make",
+      "description": "The make of the original scanner that digitized the images. Optional."
+    },
+    "scanner_model": {
+      "$id": "#/properties/scanner_model",
+      "type": "string",
+      "title": "Scanner Model",
+      "description": "The model of the original scanner that digitized the images. Optional."
+    },
+    "scanning_order": {
+      "$id": "#/properties/scanning_order",
+      "type": "string",
+      "title": "Scanning Order",
+      "description": "The order of the scanned images.  If not included, defaults to left-to-right.",
+      "enum": ["right-to-left", "left-to-right"]
+    },
+    "reading_order": {
+      "$id": "#/properties/reading_order",
+      "type": "string",
+      "title": "Reading Order",
+      "description": "The order the scanned images should be read in.  If not included, defaults to left-to-right.",
+      "enum": ["right-to-left", "left-to-right"]
+    },
+    "pagedata": {
+      "$id": "#/properties/pagedata",
+      "type": "object",
+      "title": "Page Data",
+      "description": "A property that supports navigation and accessibility across the digitized text",
+      "patternProperties": {
+        "^[0-9]{8}\\.(tif|jp2)$": {
+          "type": "object",
+          "properties": {
+            "orderlabel": {
+              "$id": "#/properties/pagedata/orderlabel",
+              "type": "string",
+              "title": "Order Label",
+              "description": "Holds the source page number."
+            },
+            "label": {
+              "$id": "#/properties/pagedata/label",
+              "type": "string",
+              "title": "Label",
+              "pattern": "^(BACK_COVER|BLANK|CHAPTER_PAGE|CHAPTER_START|COPYRIGHT|FIRST_CONTENT_CHAPTER_START|FOLDOUT|FRONT_COVER|IMAGE_ON_PAGE|INDEX|MULTIWORK_BOUNDARY|PREFACE|REFERENCES|TABLE_OF_CONTENTS|TITLE|TITLE_PARTS)(,(BACK_COVER|BLANK|CHAPTER_PAGE|CHAPTER_START|COPYRIGHT|FIRST_CONTENT_CHAPTER_START|FOLDOUT|FRONT_COVER|IMAGE_ON_PAGE|INDEX|MULTIWORK_BOUNDARY|PREFACE|REFERENCES|TABLE_OF_CONTENTS|TITLE|TITLE_PARTS))*$",
+              "description": "Holds the source page tag. Since HathiTrust allows us to have multiple values separated by a comma, we can't use an enum."
+            }
+          },
+          "additionalProperties": false
+          }
+        }
+    }
+  },
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": ["bitonal_resolution_dpi"]
+    },
+    {
+      "required": ["contone_resolution_dpi"]
+    }
+  ],
+  "dependencies": {
+    "image_compression_date": ["image_compression_agent", "image_compression_tool"],
+    "image_compression_agent": ["image_compression_date", "image_compression_tool"],
+    "image_compression_tool": ["image_compression_date", "image_compression_agent"]
+  }
+}
