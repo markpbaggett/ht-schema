@@ -4,7 +4,8 @@ A JSON schema and tooling to test whether a meta.yml file in a HathiTrust SIP is
 
 ## How to Use
 
-If you just want to grab the schema and bring it into an application, you can grab it from `schemas\ht.json`.
+If you just want to grab the schema and bring it into an application, you can grab it from `schemas\ht.json` or 
+from [here](https://markpbaggett.github.io/ht-schema/schemas/ht.json).
 
 If you want to use the built in validator, you can install like so:
 
