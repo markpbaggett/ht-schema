@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://example.com/ht_schema/schemas/ht.json",
+  "$id": "https://markpbaggett.github.io/ht-schema/schemas/ht.json",
   "type": "object",
   "title": "TAMU Libraries HathiTrust Schema",
   "comment": "profile, classes and properties are required; contexts and mappings are not",
@@ -99,15 +99,30 @@
               "$id": "#/properties/pagedata/label",
               "title": "Label",
               "description": "Holds the source page tag. Since HathiTrust allows us to have multiple values separated by a comma, we can't use an enum.",
-              "items": {
-                "type": "string",
-                "enum": ["BACK_COVER", "BLANK", "CHAPTER_PAGE", "CHAPTER_START", "COPYRIGHT", "FIRST_CONTENT_CHAPTER_START", "FOLDOUT", "FRONT_COVER", "IMAGE_ON_PAGE", "INDEX", "MULTIWORK_BOUNDARY", "PREFACE", "REFERENCES", "TABLE_OF_CONTENTS", "TITLE", "TITLE_PARTS"]
-              },
-              "minItems": 0,
-              "uniqueItems": true,
-              "anyOf": [
-                { "type": "string" },
-                { "type": "array" }
+              "oneOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "BACK_COVER", "BLANK", "CHAPTER_PAGE", "CHAPTER_START", "COPYRIGHT",
+                    "FIRST_CONTENT_CHAPTER_START", "FOLDOUT", "FRONT_COVER", "IMAGE_ON_PAGE",
+                    "INDEX", "MULTIWORK_BOUNDARY", "PREFACE", "REFERENCES", "TABLE_OF_CONTENTS",
+                    "TITLE", "TITLE_PARTS"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "BACK_COVER", "BLANK", "CHAPTER_PAGE", "CHAPTER_START", "COPYRIGHT",
+                      "FIRST_CONTENT_CHAPTER_START", "FOLDOUT", "FRONT_COVER", "IMAGE_ON_PAGE",
+                      "INDEX", "MULTIWORK_BOUNDARY", "PREFACE", "REFERENCES", "TABLE_OF_CONTENTS",
+                      "TITLE", "TITLE_PARTS"
+                    ]
+                  },
+                  "minItems": 0,
+                  "uniqueItems": true
+                }
               ]
             }
           },
