@@ -97,10 +97,18 @@
             },
             "label": {
               "$id": "#/properties/pagedata/label",
-              "type": "string",
               "title": "Label",
-              "pattern": "^(BACK_COVER|BLANK|CHAPTER_PAGE|CHAPTER_START|COPYRIGHT|FIRST_CONTENT_CHAPTER_START|FOLDOUT|FRONT_COVER|IMAGE_ON_PAGE|INDEX|MULTIWORK_BOUNDARY|PREFACE|REFERENCES|TABLE_OF_CONTENTS|TITLE|TITLE_PARTS)(,(BACK_COVER|BLANK|CHAPTER_PAGE|CHAPTER_START|COPYRIGHT|FIRST_CONTENT_CHAPTER_START|FOLDOUT|FRONT_COVER|IMAGE_ON_PAGE|INDEX|MULTIWORK_BOUNDARY|PREFACE|REFERENCES|TABLE_OF_CONTENTS|TITLE|TITLE_PARTS))*$",
-              "description": "Holds the source page tag. Since HathiTrust allows us to have multiple values separated by a comma, we can't use an enum."
+              "description": "Holds the source page tag. Since HathiTrust allows us to have multiple values separated by a comma, we can't use an enum.",
+              "items": {
+                "type": "string",
+                "enum": ["BACK_COVER", "BLANK", "CHAPTER_PAGE", "CHAPTER_START", "COPYRIGHT", "FIRST_CONTENT_CHAPTER_START", "FOLDOUT", "FRONT_COVER", "IMAGE_ON_PAGE", "INDEX", "MULTIWORK_BOUNDARY", "PREFACE", "REFERENCES", "TABLE_OF_CONTENTS", "TITLE", "TITLE_PARTS"]
+              },
+              "minItems": 0,
+              "uniqueItems": true,
+              "anyOf": [
+                { "type": "string" },
+                { "type": "array" }
+              ]
             }
           },
           "additionalProperties": false

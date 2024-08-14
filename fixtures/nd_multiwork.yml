@@ -305,7 +305,7 @@ pagedata:
     00000297.jp2: { label: "BLANK" }
     00000298.jp2: { label: "BLANK" }
     00000299.jp2: { label: "BLANK" }
-    00000300.jp2: { label: "CHAPTER_START", "MULTIWORK_BOUNDARY" }
+    00000300.jp2: { label: ["CHAPTER_START", "MULTIWORK_BOUNDARY"] }
     00000301.jp2: { label: "BLANK" }
     00000302.jp2: { label: "BLANK" }
     00000303.jp2: { label: "BLANK" }
