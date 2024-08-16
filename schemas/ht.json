@@ -3,7 +3,7 @@
   "$id": "https://markpbaggett.github.io/ht-schema/schemas/ht.json",
   "type": "object",
   "title": "TAMU Libraries HathiTrust Schema",
-  "comment": "profile, classes and properties are required; contexts and mappings are not",
+  "comment": "This is an attempt to express requirements for a HathiTrust meta.yml as a JSON schema",
   "required": [
     "capture_date",
     "scanner_user"
